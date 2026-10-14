@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    env:
+      GOTOOLCHAIN: local
+      GOWORK: off
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version: '1.26'
+      - name: Install C tools
+        run: sudo apt-get update && sudo apt-get install -y clang gcc
+      - name: Test metadata and binding tools
+        run: go test ./...
+      - name: Test C ABI runtime
+        working-directory: lib/cabi
+        run: CGO_ENABLED=0 go test ./...
+      - name: Build standalone installation
+        run: |
+          bash -n build.sh
+          ./build.sh _artifact/toolchain
+          test "$(./_artifact/toolchain/bin/goml-c-bind --runtime-dir)" = "$PWD/_artifact/toolchain/lib/cabi"
