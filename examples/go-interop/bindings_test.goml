@@ -1,0 +1,24 @@
+package main;
+
+use module::bindings;
+use std::ffi;
+use std::testing;
+
+#[test]
+fn explicit_string_arguments_and_results() -> () {
+    testing::assert_eq(
+        bindings::count(ffi::string_from_text("banana"), ffi::string_from_text("a")),
+        3,
+    );
+    testing::assert_eq(bindings::count(ffi::string_from_text("中文"), ffi::string_from_text("")), 3);
+    let (value, error) = bindings::parse(ffi::string_from_text("-42"));
+    testing::assert_eq(value, -42);
+    testing::assert(ffi::error_is_nil(error));
+}
+
+#[test]
+fn explicit_error_result() -> () {
+    let (value, error) = bindings::parse(ffi::string_from_text("invalid"));
+    testing::assert_eq(value, 0);
+    testing::assert(!ffi::error_is_nil(error));
+}
