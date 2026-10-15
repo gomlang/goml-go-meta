@@ -6,6 +6,7 @@ Install the [GoML toolchain](https://github.com/gomlang/goml/blob/main/docs/rele
 
 ```sh
 goml check
+goml test
 goml run
 ```
 
@@ -18,3 +19,5 @@ true
 ```
 
 `bindings/generated.goml` and `native/generated.go` are ordinary source inputs. The historical JSON configuration and ownership manifest record how they were generated; the tools in this repository do not regenerate Go bindings. The final Go build validates calls through the explicit declarations. See [Go interoperability](https://github.com/gomlang/goml/blob/main/docs/ffi/bind-go.md) for the declaration model.
+
+The tests cover string conversion, Unicode input, successful numeric conversion and a non-nil Go error result. The repository's [example test script](../../test-examples.sh) also checks the exact program output against a selected GoML installation.

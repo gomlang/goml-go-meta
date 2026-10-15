@@ -13,3 +13,5 @@ CGO_ENABLED=1 goml run
 Output is `42`, `GoML calls C`, and `255`. `bindings/generated.goml`, `native/generated.go` and `bindings.json.goml-c-bind.json` are generated together. Run `CGO_ENABLED=1 goml-c-bind bindings.json --check` explicitly to verify output against C inputs.
 
 The checked-in configuration uses cgo. See the [C binding guide](../../docs/bind-c.md) for the supported mappings, lifetime rules and dynamic backend. Dynamic consumers also need an explicit runtime dependency as described in [runtime setup](../../README.md#c-bindings-and-runtime).
+
+The repository's [example test script](../../test-examples.sh) builds a fresh generator installation, copies the formatter from the selected GoML installation, runs these commands and checks the exact program output.
