@@ -32,11 +32,11 @@ jobs:
           bash -n build.sh
           ./build.sh _artifact/toolchain
           test "$(./_artifact/toolchain/bin/goml-c-bind --runtime-dir)" = "$PWD/_artifact/toolchain/lib/cabi"
-      - name: Install GoML 0.1.60
+      - name: Install GoML 0.1.63
         run: |
           mkdir -p _artifact/goml
-          curl -fL --retry 3 https://github.com/gomlang/goml/releases/download/v0.1.60/goml-0.1.60-linux-amd64.tar.gz -o _artifact/goml.tar.gz
-          printf '%s  %s\n' e5ffdff05df371aa99b46831e86c91110e4e1dbb37f4174f00f010211e98e1cd _artifact/goml.tar.gz | sha256sum -c -
+          curl -fL --retry 3 https://github.com/gomlang/goml/releases/download/v0.1.63/goml-0.1.63-linux-amd64.tar.gz -o _artifact/goml.tar.gz
+          printf '%s  %s\n' efa81be69cd880c996735252b7cacfe9283eb83f67b649670183b7c9c8d0c236 _artifact/goml.tar.gz | sha256sum -c -
           tar -xzf _artifact/goml.tar.gz --strip-components=1 -C _artifact/goml
           _artifact/goml/bin/goml __toolchain-finalize --prefix "$PWD/_artifact/goml"
       - name: Test independent GoML examples

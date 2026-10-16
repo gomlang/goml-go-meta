@@ -81,4 +81,4 @@ To check both examples against an installed GoML 0.1.60 or newer toolchain:
 GOML_BIN_DIR=/absolute/path/to/goml/bin bash test-examples.sh
 ```
 
-This builds a fresh standalone tool installation, copies the selected toolchain's formatter, regenerates and verifies the C bindings, and checks, tests and runs both examples with exact output assertions. All build outputs go under `_artifact/example-tests`. CI uses the checksum-pinned GoML 0.1.60 release; the same script accepts a local compiler build while retaining its adjacent library resources.
+This builds a fresh standalone tool installation, copies the selected toolchain's formatter, regenerates and verifies the C bindings, and checks, tests and runs both examples with exact output assertions. All build outputs go under `_artifact/example-tests`. CI uses the checksum-pinned GoML 0.1.63 release; the same script accepts a local compiler build while retaining its adjacent library resources.
